@@ -10,13 +10,26 @@ def format_currency(value: float) -> str:
 def prepare_expense_rows(expenses: list[dict]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for item in expenses:
+        # 根据收支类型调整显示的金额：收入为正，支出显示为负
+        try:
+            amt = float(item.get("amount", 0.0))
+        except Exception:
+            amt = 0.0
+        # 这里只用于显示：支出用括号表示负数，收入用正常正数表示
+        if amt < 0:
+            display_amount = f"({format_currency(abs(amt))})"
+        else:
+            display_amount = format_currency(amt)
+
         rows.append(
             {
                 "ID": item["id"],
-                "金额": format_currency(item["amount"]),
-                "分类": item["category"],
-                "日期": item["date"],
-                "备注": item["note"] or "-",
+                "金额": display_amount,
+                "类型": item.get("transaction_type", "支出"),
+                "支付方式": item.get("payment_method", "支付宝"),
+                "分类": item.get("category", "其他"),
+                "日期": item.get("date"),
+                "备注": item.get("note") or "-",
             }
         )
     return rows

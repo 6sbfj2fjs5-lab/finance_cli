@@ -3,26 +3,31 @@
 ## 项目启动步骤
 
 1. 打开项目目录：
+
    ```powershell
    cd "c:\Users\徐媛媛\Desktop\AI Coding\finance_cli"
    ```
-
 2. 启用或创建 Python 虚拟环境（如果尚未创建）：
+
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
-
 3. 安装依赖：
+
    ```powershell
    python -m pip install -r requirements.txt
    ```
-
 4. 启动 Streamlit 应用：
+
    ```powershell
    python -m streamlit run app.py
-   ```
 
+
+   .\.venv\Scripts\python.exe -m streamlit run app.py
+   果不想激活虚拟环境，直接指定 venv 里的 python
+   ```
 5. 在浏览器中打开：
+
    ```text
    http://localhost:8501
    ```
